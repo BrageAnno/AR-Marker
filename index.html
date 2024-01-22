@@ -6,23 +6,6 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
   </head>
-  <head>
-    <style>
-        #example-scanning-overlay {
-        }
-        #example-scanning-overlay.hidden {
-          display: none;
-        }
-    </style>
-  </head>
-  <body>
-    <div id="example-scanning-overlay" class="hidden">
-      ...
-    </div>
-    <a-scene mindar-image="uiScanning: #example-scanning-overlay; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;">
-      ...
-    </a-scene>
-  </body>
   <body>
     <a-scene mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
@@ -36,6 +19,6 @@
         <a-gltf-model rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel">
       </a-entity>
     </a-scene>
-    <a-scene mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind; uiError:no; uiLoading:no; uiScanning=#example-scanning-overlay;"/>
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind; uiError:no; uiLoading:no; uiScanning=#example-scanning-overlay;"/>
   </body>
 </html>
