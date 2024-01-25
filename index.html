@@ -23,8 +23,15 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           this.el.addEventListener('click', this.onClick.bind(this));
+          this.el.addEventListener('touchstart', this.onTouchStart.bind(this));
         },
         onClick: function () {
+          this.toggleModel();
+        },
+        onTouchStart: function () {
+          this.toggleModel();
+        },
+        toggleModel: function () {
           var model = document.getElementById('avatarModel');
           var currentModelSrc = model.getAttribute('gltf-model').src;
           var newModelSrc =
