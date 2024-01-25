@@ -47,7 +47,16 @@
             currentModelSrc === '#avatarModel1'
               ? '#avatarModel2'
               : '#avatarModel1';
-          model.setAttribute('gltf-model', 'src', newModelSrc);
+
+          // Pre-load the new model
+          var newModel = document.querySelector(newModelSrc);
+          if (!newModel.hasLoaded) {
+            newModel.addEventListener('loaded', function () {
+              model.setAttribute('gltf-model', 'src', newModelSrc);
+            });
+          } else {
+            model.setAttribute('gltf-model', 'src', newModelSrc);
+          }
         },
       });
     </script>
