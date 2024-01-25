@@ -1,3 +1,27 @@
+<!--<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <!--<img id="card" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/Anno_AR_Logo.png" /> -->
+        <!--<a-asset-item id="avatarModel" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/DomkirkeoddenARTest.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!--<a-plane src="#card" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane>-->
+        <!--<a-gltf-model rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel">
+      </a-entity>
+    </a-scene>
+  </body>
+</html>-->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,14 +34,44 @@
     <a-scene mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!--<img id="card" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/Anno_AR_Logo.png" /> -->
-        <a-asset-item id="avatarModel" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/DomkirkeoddenARTest.glb"></a-asset-item>
+        <a-asset-item id="avatarModel1" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/DomkirkeoddenARTest.glb"></a-asset-item>
+        <a-asset-item id="avatarModel2" src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/DomkirkeoddenARTESTColor.glb"></a-asset-item> <!-- Replace with the URL of your second model -->
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <!--<a-plane src="#card" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane>-->
-        <a-gltf-model rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel">
+        <a-gltf-model id="avatarModel" rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel1"></a-gltf-model>
       </a-entity>
+
+      <!-- UI button to change the model -->
+      <a-entity
+        geometry="primitive: plane; width: 2; height: 0.5"
+        material="color: #333"
+        position="0 2 -5"
+        text="value: Change Model; align: center; color: white; wrapCount: 10"
+        event-set__1="_event: mousedown; material.color: #555"
+        event-set__2="_event: mouseup; material.color: #333"
+        event-set__3="_event: click; changeModel"
+        cursor-listener
+      ></a-entity>
     </a-scene>
+
+    <script>
+      AFRAME.registerComponent('changeModel', {
+        init: function () {
+          this.el.addEventListener('click', this.onClick.bind(this));
+        },
+        onClick: function () {
+          var model = document.getElementById('avatarModel');
+          var currentModelSrc = model.getAttribute('gltf-model').src;
+          var newModelSrc =
+            currentModelSrc === '#avatarModel1'
+              ? '#avatarModel2'
+              : '#avatarModel1';
+          model.setAttribute('gltf-model', 'src', newModelSrc);
+        },
+      });
+    </script>
   </body>
 </html>
