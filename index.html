@@ -13,7 +13,6 @@
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      touch-listener
     >
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
@@ -38,14 +37,22 @@
           visible="false"
         ></a-entity>
       </a-entity>
+
+      <!-- Touch event to toggle visibility -->
+      <a-entity
+        geometry="primitive: plane; width: 2; height: 0.5"
+        material="color: #333"
+        position="0 2 -5"
+        text="value: Touch to Toggle Model; align: center; color: white; wrapCount: 10"
+        event-set__1="_event: mousedown; material.color: #555"
+        event-set__2="_event: mouseup; material.color: #333"
+        event-set__3="_event: touchstart; toggleVisibility"
+      ></a-entity>
     </a-scene>
 
     <script>
-      AFRAME.registerComponent('touch-listener', {
+      AFRAME.registerComponent('toggleVisibility', {
         init: function () {
-          this.el.sceneEl.addEventListener('touchstart', this.onTouchStart.bind(this));
-        },
-        onTouchStart: function () {
           this.toggleModel();
         },
         toggleModel: function () {
