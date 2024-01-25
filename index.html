@@ -13,7 +13,6 @@
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      touch-listener
     >
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
@@ -21,47 +20,44 @@
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity
-        mindar-image-target="targetIndex: 0"
-        touch-listener
-      >
-        <a-entity
-          id="avatarModel1"
-          gltf-model="#avatarModel1"
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model
+          id="avatarModel"
           rotation="90 0 0"
           position="0 0 0.1"
           scale="0.18 0.18 0.18"
-        ></a-entity>
-        <a-entity
-          id="avatarModel2"
-          gltf-model="#avatarModel2"
-          rotation="90 0 0"
-          position="0 0 0.1"
-          scale="0.18 0.18 0.18"
-          visible="false"
-        ></a-entity>
+          src="#avatarModel1"
+        ></a-gltf-model>
+
+        <!-- Button to change the model -->
+        <a-plane
+          geometry="primitive: plane; width: 2; height: 0.5"
+          material="color: #333"
+          position="0 2 -5"
+          text="value: Change Model; align: center; color: white; wrapCount: 10"
+          event-set__1="_event: mousedown; material.color: #555"
+          event-set__2="_event: mouseup; material.color: #333"
+          event-set__3="_event: touchstart; changeModel"
+        ></a-plane>
       </a-entity>
     </a-scene>
 
     <script>
-      AFRAME.registerComponent('touch-listener', {
+      AFRAME.registerComponent('changeModel', {
         init: function () {
-          this.el.sceneEl.addEventListener('touchstart', this.onTouchStart.bind(this));
+          this.el.addEventListener('touchstart', this.onTouchStart.bind(this));
         },
         onTouchStart: function () {
           this.toggleModel();
         },
         toggleModel: function () {
-          var model1 = document.getElementById('avatarModel1');
-          var model2 = document.getElementById('avatarModel2');
-
-          if (model1.getAttribute('visible')) {
-            model1.setAttribute('visible', 'false');
-            model2.setAttribute('visible', 'true');
-          } else {
-            model1.setAttribute('visible', 'true');
-            model2.setAttribute('visible', 'false');
-          }
+          var model = document.getElementById('avatarModel');
+          var currentModelSrc = model.getAttribute('gltf-model').src;
+          var newModelSrc =
+            currentModelSrc === '#avatarModel1'
+              ? '#avatarModel2'
+              : '#avatarModel1';
+          model.setAttribute('gltf-model', 'src', newModelSrc);
         },
       });
     </script>
