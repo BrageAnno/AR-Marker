@@ -21,28 +21,28 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model id="avatarModel" rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel" raycaster-listen></a-gltf-model>
+        <a-gltf-model id="avatarModel" rotation="90 0 0" position="0 0 0.1" scale="0.18 0.18 0.18" src="#avatarModel" raycaster-listen cursor="rayOrigin: mouse;"></a-gltf-model>
       </a-entity>
 
       <!-- UI button to change the model -->
-      <a-entity
+      <a-plane
         geometry="primitive: plane; width: 2; height: 0.5"
         material="color: #333"
         position="0 2 -5"
         text="value: Change Model; align: center; color: white; wrapCount: 10"
-        event-set__1="_event: touchstart; material.color: #555"
-        event-set__2="_event: touchend; material.color: #333"
-        event-set__3="_event: touchend; changeModel"
+        event-set__1="_event: mousedown; material.color: #555"
+        event-set__2="_event: mouseup; material.color: #333"
+        event-set__3="_event: click; changeModel"
         cursor-listener
-      ></a-entity>
+      ></a-plane>
     </a-scene>
 
     <script>
       AFRAME.registerComponent('changeModel', {
         init: function () {
-          this.el.addEventListener('touchend', this.onTouchEnd.bind(this));
+          this.el.addEventListener('click', this.onClick.bind(this));
         },
-        onTouchEnd: function () {
+        onClick: function () {
           this.toggleModel();
         },
         toggleModel: function () {
