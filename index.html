@@ -21,36 +21,21 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-entity
-          id="modelContainer"
-          position="0 0.1 0"
+        <a-gltf-model
+          id="avatarModel1"
+          rotation="90 0 0"
+          position="-0.5 0 0.1"
           scale="0.18 0.18 0.18"
-          change-material
-        ></a-entity>
+          src="#avatarModel1"
+        ></a-gltf-model>
+        <a-gltf-model
+          id="avatarModel2"
+          rotation="90 0 0"
+          position="0.5 0 0.1"
+          scale="0.18 0.18 0.18"
+          src="#avatarModel2"
+        ></a-gltf-model>
       </a-entity>
-
-      <script>
-        AFRAME.registerComponent('change-material', {
-          init: function () {
-            // Load the first model initially
-            var avatarModel1 = document.createElement('a-gltf-model');
-            avatarModel1.setAttribute('rotation', '90 0 0');
-            avatarModel1.setAttribute('position', '-0.5 0 0');
-            avatarModel1.setAttribute('src', '#avatarModel1');
-            this.el.appendChild(avatarModel1);
-
-            // Register touch event to change material on touch
-            this.el.addEventListener('touchstart', function () {
-              // Load the second model with a different material
-              var avatarModel2 = document.createElement('a-gltf-model');
-              avatarModel2.setAttribute('rotation', '90 0 0');
-              avatarModel2.setAttribute('position', '0.5 0 0');
-              avatarModel2.setAttribute('src', '#avatarModel2');
-              this.appendChild(avatarModel2);
-            });
-          },
-        });
-      </script>
     </a-scene>
   </body>
 </html>
