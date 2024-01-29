@@ -20,7 +20,7 @@
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0" cursor-listener>
+      <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model
           id="avatarModel"
           rotation="90 0 0"
@@ -28,24 +28,13 @@
           scale="0.18 0.18 0.18"
           src="#avatarModel1"
         ></a-gltf-model>
-
-        <!-- Button to change the model -->
-        <a-plane
-          geometry="primitive: plane; width: 2; height: 0.5"
-          material="color: #333"
-          position="0 2 -5"
-          text="value: Change Model; align: center; color: white; wrapCount: 10"
-          event-set__1="_event: mousedown; material.color: #555"
-          event-set__2="_event: mouseup; material.color: #333"
-          event-set__3="_event: click; changeModel"
-        ></a-plane>
       </a-entity>
     </a-scene>
 
     <script>
-      AFRAME.registerComponent('cursor-listener', {
+      AFRAME.registerComponent('auto-change-model', {
         init: function () {
-          this.el.addEventListener('click', this.toggleModel.bind(this));
+          this.switchInterval = setInterval(this.toggleModel.bind(this), 5000);
         },
         toggleModel: function () {
           var model = document.getElementById('avatarModel');
@@ -58,5 +47,7 @@
         },
       });
     </script>
+
+    <a-entity auto-change-model></a-entity>
   </body>
 </html>
