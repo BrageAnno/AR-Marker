@@ -46,6 +46,10 @@
               el.setAttribute('gltf-model', 'src', '#avatarModel1');
               currentModel = 'avatarModel1';
             }
+
+            // Reset animation
+            el.removeAttribute('animation-mixer');
+            el.setAttribute('animation-mixer', {});
           }, 5000); // Switch models every 5 seconds
         },
       });
