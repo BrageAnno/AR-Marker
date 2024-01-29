@@ -42,7 +42,7 @@
       ></a-entity>
 
       <!-- 2D UI Button -->
-      <button id="toggleButton" onclick="toggleModelsVisibility()">Toggle Models</button>
+      <button id="toggleButton">Toggle Models</button>
     </a-entity>
 
     <script>
@@ -67,6 +67,12 @@
 
       // Show the first model initially
       avatarModel1.setAttribute('visible', true);
+
+      // Event listener for touchstart on the button
+      var toggleButton = document.getElementById('toggleButton');
+      toggleButton.addEventListener('touchstart', function () {
+        toggleModelsVisibility();
+      });
     </script>
   </a-scene>
 </body>
