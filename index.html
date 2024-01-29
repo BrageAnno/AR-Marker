@@ -30,36 +30,25 @@
         ></a-gltf-model>
 
         <!-- Button to change the model -->
-        <a-plane
-          geometry="primitive: plane; width: 2; height: 0.5"
-          material="color: #333"
-          position="0 2 -5"
-          text="value: Change Model; align: center; color: white; wrapCount: 10"
-          event-set__1="_event: mousedown; material.color: #555"
-          event-set__2="_event: mouseup; material.color: #333"
-          event-set__3="_event: touchstart; changeModel"
-        ></a-plane>
+        <button
+          style="position: absolute; top: 50px; left: 50px; padding: 10px; background-color: #333; color: white; border: none; cursor: pointer;"
+          onclick="changeModel()"
+        >
+          Change Model
+        </button>
       </a-entity>
     </a-scene>
 
     <script>
-      AFRAME.registerComponent('changeModel', {
-        init: function () {
-          this.el.addEventListener('touchstart', this.onTouchStart.bind(this));
-        },
-        onTouchStart: function () {
-          this.toggleModel();
-        },
-        toggleModel: function () {
-          var model = document.getElementById('avatarModel');
-          var currentModelSrc = model.getAttribute('gltf-model').src;
-          var newModelSrc =
-            currentModelSrc === '#avatarModel1'
-              ? '#avatarModel2'
-              : '#avatarModel1';
-          model.setAttribute('gltf-model', 'src', newModelSrc);
-        },
-      });
+      function changeModel() {
+        var model = document.getElementById('avatarModel');
+        var currentModelSrc = model.getAttribute('gltf-model').src;
+        var newModelSrc =
+          currentModelSrc === '#avatarModel1'
+            ? '#avatarModel2'
+            : '#avatarModel1';
+        model.setAttribute('gltf-model', 'src', newModelSrc);
+      }
     </script>
   </body>
 </html>
