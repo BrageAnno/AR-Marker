@@ -27,6 +27,7 @@
           position="-0.5 0 0.1"
           scale="0.18 0.18 0.18"
           src="#avatarModel1"
+          clone-materials
         ></a-gltf-model>
         <a-gltf-model
           id="avatarModel2"
@@ -34,8 +35,33 @@
           position="0.5 0 0.1"
           scale="0.18 0.18 0.18"
           src="#avatarModel2"
+          clone-materials
         ></a-gltf-model>
       </a-entity>
+
+      <a-entity
+        id="clone-materials"
+        clone-materials
+        visible="false"
+      ></a-entity>
     </a-scene>
+
+    <script>
+      AFRAME.registerComponent('clone-materials', {
+        init: function () {
+          var sceneEl = this.el.sceneEl;
+          var avatarModel1 = document.getElementById('avatarModel1');
+          var avatarModel2 = document.getElementById('avatarModel2');
+
+          avatarModel1.addEventListener('model-loaded', function () {
+            sceneEl.systems.materials.cloneMaterials(avatarModel1.object3D, sceneEl);
+          });
+
+          avatarModel2.addEventListener('model-loaded', function () {
+            sceneEl.systems.materials.cloneMaterials(avatarModel2.object3D, sceneEl);
+          });
+        },
+      });
+    </script>
   </body>
 </html>
