@@ -1,77 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
-  <style>
-    #toggleButton {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: green;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <a-scene
-    mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
-    color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false"
-  >
-    <a-assets>
-      <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
-      <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
-    </a-assets>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
+        <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
+      </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-entity
-        id="modelsContainer"
-        position="0 0.1 0"
-        scale="0.18 0.18 0.18"
-      ></a-entity>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity
+          id="modelsContainer"
+          position="0 0.1 0"
+          scale="0.18 0.18 0.18"
+        ></a-entity>
+      </a-entity>
 
-      <!-- 2D UI Button -->
-      <button id="toggleButton" ontouchstart="toggleModelsVisibility()">Toggle Models</button>
-    </a-entity>
-
-    <script>
-      var modelsContainer = document.getElementById('modelsContainer');
-      var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
-      var avatarModel2 = createModel('#avatarModel2', '0.5 0 0');
-      var toggleButton = document.getElementById('toggleButton');
-
-      function createModel(src, position) {
-        var model = document.createElement('a-gltf-model');
-        model.setAttribute('rotation', '90 0 0');
-        model.setAttribute('position', position);
-        model.setAttribute('src', src);
-        model.setAttribute('visible', false); // Initially hidden
-        modelsContainer.appendChild(model);
-        return model;
-      }
-
-      function toggleModelsVisibility() {
-        avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
-        avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
-
-        // Change button color
-        toggleButton.style.backgroundColor = toggleButton.style.backgroundColor === 'green' ? 'red' : 'green';
-      }
-
-      // Show the first model initially
-      avatarModel1.setAttribute('visible', true);
-    </script>
-  </a-scene>
-</body>
+      <script>
+        var modelsContainer = document.getElementById('modelsContainer');
+        var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
+        var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
+      
+        function createModel(src, position) {
+          var model = document.createElement('a-gltf-model');
+          model.setAttribute('rotation', '90 0 0');
+          model.setAttribute('position', position);
+          model.setAttribute('src', src);
+          model.setAttribute('visible', false); // Initially hidden
+          modelsContainer.appendChild(model);
+          return model;
+        }
+      
+        function toggleModelsVisibility() {
+          avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
+          avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
+        }
+      
+        // Show the first model initially
+        avatarModel1.setAttribute('visible', true);
+      
+        // Toggle between models on touch
+        document.addEventListener('touchstart', function () {
+          toggleModelsVisibility();
+        });
+      </script>
+    </a-scene>
+  </body>
 </html>
