@@ -42,13 +42,14 @@
       ></a-entity>
 
       <!-- 2D UI Button -->
-      <button id="toggleButton">Toggle Models</button>
+      <button id="toggleButton" ontouchstart="toggleModelsVisibility()">Toggle Models</button>
     </a-entity>
 
     <script>
       var modelsContainer = document.getElementById('modelsContainer');
       var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
       var avatarModel2 = createModel('#avatarModel2', '0.5 0 0');
+      var toggleButton = document.getElementById('toggleButton');
 
       function createModel(src, position) {
         var model = document.createElement('a-gltf-model');
@@ -63,19 +64,13 @@
       function toggleModelsVisibility() {
         avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
         avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
+
+        // Change button color
+        toggleButton.style.backgroundColor = toggleButton.style.backgroundColor === 'green' ? 'red' : 'green';
       }
 
       // Show the first model initially
       avatarModel1.setAttribute('visible', true);
-
-      // Toggle between models only when touching the button
-      var toggleButton = document.getElementById('toggleButton');
-      document.addEventListener('pointerdown', function (event) {
-        // Check if the target is the button or its child elements
-        if (event.target === toggleButton || toggleButton.contains(event.target)) {
-          toggleModelsVisibility();
-        }
-      });
     </script>
   </a-scene>
 </body>
