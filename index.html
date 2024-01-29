@@ -29,31 +29,31 @@
       </a-entity>
 
       <script>
-        // Load the first model initially
         var modelsContainer = document.getElementById('modelsContainer');
-        var currentModelIndex = 1; // Initial model index
+        var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
+        var avatarModel2 = createModel('#avatarModel2', '0.5 0 0');
       
-        function loadModel(index) {
-          // Clear existing models
-          while (modelsContainer.firstChild) {
-            modelsContainer.removeChild(modelsContainer.firstChild);
-          }
-      
-          // Create and append the selected model
-          var avatarModel = document.createElement('a-gltf-model');
-          avatarModel.setAttribute('rotation', '90 0 0');
-          avatarModel.setAttribute('position', (index === 1) ? '-0.5 0 0' : '0.5 0 0');
-          avatarModel.setAttribute('src', '#avatarModel' + index);
-          modelsContainer.appendChild(avatarModel);
+        function createModel(src, position) {
+          var model = document.createElement('a-gltf-model');
+          model.setAttribute('rotation', '90 0 0');
+          model.setAttribute('position', position);
+          model.setAttribute('src', src);
+          model.setAttribute('visible', false); // Initially hidden
+          modelsContainer.appendChild(model);
+          return model;
         }
       
-        // Load the first model initially
-        loadModel(currentModelIndex);
+        function toggleModelsVisibility() {
+          avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
+          avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
+        }
       
-        // Switch between models on touch
+        // Show the first model initially
+        avatarModel1.setAttribute('visible', true);
+      
+        // Toggle between models on touch
         document.addEventListener('touchstart', function () {
-          currentModelIndex = (currentModelIndex === 1) ? 2 : 1;
-          loadModel(currentModelIndex);
+          toggleModelsVisibility();
         });
       </script>
     </a-scene>
