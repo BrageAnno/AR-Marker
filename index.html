@@ -20,7 +20,7 @@
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
+      <a-entity mindar-image-target="targetIndex: 0" cursor-listener>
         <a-gltf-model
           id="avatarModel"
           rotation="90 0 0"
@@ -30,25 +30,33 @@
         ></a-gltf-model>
 
         <!-- Button to change the model -->
-        <button
-          style="position: absolute; top: 50px; left: 50px; padding: 10px; background-color: #333; color: white; border: none; cursor: pointer;"
-          onclick="changeModel()"
-        >
-          Change Model
-        </button>
+        <a-plane
+          geometry="primitive: plane; width: 2; height: 0.5"
+          material="color: #333"
+          position="0 2 -5"
+          text="value: Change Model; align: center; color: white; wrapCount: 10"
+          event-set__1="_event: mousedown; material.color: #555"
+          event-set__2="_event: mouseup; material.color: #333"
+          event-set__3="_event: click; changeModel"
+        ></a-plane>
       </a-entity>
     </a-scene>
 
     <script>
-      function changeModel() {
-        var model = document.getElementById('avatarModel');
-        var currentModelSrc = model.getAttribute('gltf-model').src;
-        var newModelSrc =
-          currentModelSrc === '#avatarModel1'
-            ? '#avatarModel2'
-            : '#avatarModel1';
-        model.setAttribute('gltf-model', 'src', newModelSrc);
-      }
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          this.el.addEventListener('click', this.toggleModel.bind(this));
+        },
+        toggleModel: function () {
+          var model = document.getElementById('avatarModel');
+          var currentModelSrc = model.getAttribute('gltf-model').src;
+          var newModelSrc =
+            currentModelSrc === '#avatarModel1'
+              ? '#avatarModel2'
+              : '#avatarModel1';
+          model.setAttribute('gltf-model', 'src', newModelSrc);
+        },
+      });
     </script>
   </body>
 </html>
