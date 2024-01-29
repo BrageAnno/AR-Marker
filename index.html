@@ -22,28 +22,33 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <a-entity
-          id="modelsContainer"
+          id="modelContainer"
           position="0 0.1 0"
           scale="0.18 0.18 0.18"
+          change-material
         ></a-entity>
       </a-entity>
 
       <script>
-        // Load the first model initially
-        var modelsContainer = document.getElementById('modelsContainer');
-        var avatarModel1 = document.createElement('a-gltf-model');
-        avatarModel1.setAttribute('rotation', '90 0 0');
-        avatarModel1.setAttribute('position', '-0.5 0 0');
-        avatarModel1.setAttribute('src', '#avatarModel1');
-        modelsContainer.appendChild(avatarModel1);
+        AFRAME.registerComponent('change-material', {
+          init: function () {
+            // Load the first model initially
+            var avatarModel1 = document.createElement('a-gltf-model');
+            avatarModel1.setAttribute('rotation', '90 0 0');
+            avatarModel1.setAttribute('position', '-0.5 0 0');
+            avatarModel1.setAttribute('src', '#avatarModel1');
+            this.el.appendChild(avatarModel1);
 
-        // Load the second model on touch
-        document.addEventListener('touchstart', function () {
-          var avatarModel2 = document.createElement('a-gltf-model');
-          avatarModel2.setAttribute('rotation', '90 0 0');
-          avatarModel2.setAttribute('position', '0.5 0 0');
-          avatarModel2.setAttribute('src', '#avatarModel2');
-          modelsContainer.appendChild(avatarModel2);
+            // Register touch event to change material on touch
+            this.el.sceneEl.addEventListener('touchstart', function () {
+              // Load the second model with a different material
+              var avatarModel2 = document.createElement('a-gltf-model');
+              avatarModel2.setAttribute('rotation', '90 0 0');
+              avatarModel2.setAttribute('position', '0.5 0 0');
+              avatarModel2.setAttribute('src', '#avatarModel2');
+              this.el.appendChild(avatarModel2);
+            });
+          },
         });
       </script>
     </a-scene>
