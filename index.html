@@ -34,16 +34,18 @@
     <script>
       AFRAME.registerComponent('auto-change-model', {
         init: function () {
-          this.switchInterval = setInterval(this.toggleModel.bind(this), 5000);
+          this.el.addEventListener('loaded', this.setup.bind(this));
         },
-        toggleModel: function () {
+        setup: function () {
           var model = document.getElementById('avatarModel');
-          var currentModelSrc = model.getAttribute('gltf-model').src;
-          var newModelSrc =
-            currentModelSrc === '#avatarModel1'
-              ? '#avatarModel2'
-              : '#avatarModel1';
-          model.setAttribute('gltf-model', 'src', newModelSrc);
+          var animation = document.createElement('a-animation');
+          animation.setAttribute('attribute', 'gltf-model');
+          animation.setAttribute('from', '#avatarModel1');
+          animation.setAttribute('to', '#avatarModel2');
+          animation.setAttribute('dur', '5000'); // Duration in milliseconds
+          animation.setAttribute('direction', 'alternate');
+          animation.setAttribute('repeat', 'indefinite');
+          model.appendChild(animation);
         },
       });
     </script>
