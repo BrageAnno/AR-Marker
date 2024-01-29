@@ -68,9 +68,14 @@
       // Show the first model initially
       avatarModel1.setAttribute('visible', true);
 
-      // Event listener for touchstart on the button
+      // Toggle between models on touch
+      document.addEventListener('touchstart', function () {
+        toggleModelsVisibility();
+      });
+
+      // Toggle between models on button click
       var toggleButton = document.getElementById('toggleButton');
-      toggleButton.addEventListener('touchstart', function () {
+      toggleButton.addEventListener('click', function () {
         toggleModelsVisibility();
       });
     </script>
