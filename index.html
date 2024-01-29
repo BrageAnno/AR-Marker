@@ -27,29 +27,27 @@
           position="0 0 0.1"
           scale="0.18 0.18 0.18"
           src="#avatarModel1"
+          auto-change-model
         ></a-gltf-model>
       </a-entity>
     </a-scene>
-    
+
     <script>
       AFRAME.registerComponent('auto-change-model', {
         init: function () {
-          this.el.addEventListener('loaded', this.setup.bind(this));
-        },
-        setup: function () {
-          var model = document.getElementById('avatarModel');
-          setInterval(function () {
-            var currentModelSrc = model.getAttribute('gltf-model').src;
-            var newModelSrc =
-              currentModelSrc === '#avatarModel1'
-                ? '#avatarModel2'
-                : '#avatarModel1';
-            model.setAttribute('gltf-model', 'src', newModelSrc);
-          }, 5000); // Switch models every 5 seconds
+          var el = this.el;
+          el.addEventListener('loaded', function () {
+            setInterval(function () {
+              var currentModelSrc = el.getAttribute('gltf-model').src;
+              var newModelSrc =
+                currentModelSrc === '#avatarModel1'
+                  ? '#avatarModel2'
+                  : '#avatarModel1';
+              el.setAttribute('gltf-model', 'src', newModelSrc);
+            }, 5000); // Switch models every 5 seconds
+          });
         },
       });
     </script>
-
-    <a-entity auto-change-model></a-entity>
   </body>
 </html>
