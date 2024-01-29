@@ -5,6 +5,7 @@
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://unpkg.com/aframe-gui"></script>
   </head>
   <body>
     <a-scene
@@ -27,15 +28,15 @@
           scale="0.18 0.18 0.18"
         ></a-entity>
 
-        <!-- 2D UI Button -->
-        <a-plane
-          position="-0.7 -0.7 -1" 
-          rotation="-90 0 0"
-          width="0.3"
-          height="0.3"
-          color="green"
+        <!-- 2D GUI Button -->
+        <a-gui-button
           id="toggleButton"
-        ></a-plane>
+          width="1"
+          height="0.2"
+          position="0.5 0.3 -1"
+          value="Toggle Models"
+          on-click="toggleModelsVisibility"
+        ></a-gui-button>
       </a-entity>
 
       <script>
@@ -61,10 +62,13 @@
         // Show the first model initially
         avatarModel1.setAttribute('visible', true);
 
-        // Toggle between models on button click
-        var toggleButton = document.getElementById('toggleButton');
-        toggleButton.addEventListener('click', function () {
-          toggleModelsVisibility();
+        // Register the toggleModelsVisibility function to be called on button click
+        AFRAME.registerComponent('toggleModelsVisibility', {
+          init: function () {
+            this.el.addEventListener('click', function () {
+              toggleModelsVisibility();
+            });
+          },
         });
       </script>
     </a-scene>
