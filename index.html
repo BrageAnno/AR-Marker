@@ -22,37 +22,20 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model
-          id="avatarModel"
+          id="avatarModel1"
           rotation="90 0 0"
-          position="0 0 0.1"
+          position="-0.5 0 0.1" <!-- Adjust the position as needed -->
           scale="0.18 0.18 0.18"
           src="#avatarModel1"
-          auto-change-model
+        ></a-gltf-model>
+        <a-gltf-model
+          id="avatarModel2"
+          rotation="90 0 0"
+          position="0.5 0 0.1" <!-- Adjust the position as needed -->
+          scale="0.18 0.18 0.18"
+          src="#avatarModel2"
         ></a-gltf-model>
       </a-entity>
     </a-scene>
-
-    <script>
-      AFRAME.registerComponent('auto-change-model', {
-        init: function () {
-          var el = this.el;
-          var currentModel = 'avatarModel1';
-
-          setInterval(function () {
-            if (currentModel === 'avatarModel1') {
-              el.setAttribute('gltf-model', 'src', '#avatarModel2');
-              currentModel = 'avatarModel2';
-            } else {
-              el.setAttribute('gltf-model', 'src', '#avatarModel1');
-              currentModel = 'avatarModel1';
-            }
-
-            // Reset animation
-            el.removeAttribute('animation-mixer');
-            el.setAttribute('animation-mixer', {});
-          }, 5000); // Switch models every 5 seconds
-        },
-      });
-    </script>
   </body>
 </html>
