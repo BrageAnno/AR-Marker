@@ -30,7 +30,7 @@
         ></a-gltf-model>
       </a-entity>
     </a-scene>
-
+    
     <script>
       AFRAME.registerComponent('auto-change-model', {
         init: function () {
@@ -38,14 +38,14 @@
         },
         setup: function () {
           var model = document.getElementById('avatarModel');
-          var animation = document.createElement('a-animation');
-          animation.setAttribute('attribute', 'gltf-model');
-          animation.setAttribute('from', '#avatarModel1');
-          animation.setAttribute('to', '#avatarModel2');
-          animation.setAttribute('dur', '5000'); // Duration in milliseconds
-          animation.setAttribute('direction', 'alternate');
-          animation.setAttribute('repeat', 'indefinite');
-          model.appendChild(animation);
+          setInterval(function () {
+            var currentModelSrc = model.getAttribute('gltf-model').src;
+            var newModelSrc =
+              currentModelSrc === '#avatarModel1'
+                ? '#avatarModel2'
+                : '#avatarModel1';
+            model.setAttribute('gltf-model', 'src', newModelSrc);
+          }, 5000); // Switch models every 5 seconds
         },
       });
     </script>
