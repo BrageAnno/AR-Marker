@@ -70,9 +70,9 @@
 
       // Toggle between models only when touching the button
       var toggleButton = document.getElementById('toggleButton');
-      toggleButton.addEventListener('touchstart', function (event) {
-        // Check if the touch event target is the button
-        if (event.target === toggleButton) {
+      document.addEventListener('pointerdown', function (event) {
+        // Check if the target is the button or its child elements
+        if (event.target === toggleButton || toggleButton.contains(event.target)) {
           toggleModelsVisibility();
         }
       });
