@@ -31,19 +31,29 @@
       <script>
         // Load the first model initially
         var modelsContainer = document.getElementById('modelsContainer');
-        var avatarModel1 = document.createElement('a-gltf-model');
-        avatarModel1.setAttribute('rotation', '90 0 0');
-        avatarModel1.setAttribute('position', '-0.5 0 0');
-        avatarModel1.setAttribute('src', '#avatarModel1');
-        modelsContainer.appendChild(avatarModel1);
-
-        // Load the second model on touch
+        var currentModelIndex = 1; // Initial model index
+      
+        function loadModel(index) {
+          // Clear existing models
+          while (modelsContainer.firstChild) {
+            modelsContainer.removeChild(modelsContainer.firstChild);
+          }
+      
+          // Create and append the selected model
+          var avatarModel = document.createElement('a-gltf-model');
+          avatarModel.setAttribute('rotation', '90 0 0');
+          avatarModel.setAttribute('position', (index === 1) ? '-0.5 0 0' : '0.5 0 0');
+          avatarModel.setAttribute('src', '#avatarModel' + index);
+          modelsContainer.appendChild(avatarModel);
+        }
+      
+        // Load the first model initially
+        loadModel(currentModelIndex);
+      
+        // Switch between models on touch
         document.addEventListener('touchstart', function () {
-          var avatarModel2 = document.createElement('a-gltf-model');
-          avatarModel2.setAttribute('rotation', '90 0 0');
-          avatarModel2.setAttribute('position', '0.5 0 0');
-          avatarModel2.setAttribute('src', '#avatarModel2');
-          modelsContainer.appendChild(avatarModel2);
+          currentModelIndex = (currentModelIndex === 1) ? 2 : 1;
+          loadModel(currentModelIndex);
         });
       </script>
     </a-scene>
