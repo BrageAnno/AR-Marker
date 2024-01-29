@@ -40,13 +40,13 @@
             this.el.appendChild(avatarModel1);
 
             // Register touch event to change material on touch
-            this.el.sceneEl.addEventListener('touchstart', function () {
+            this.el.addEventListener('touchstart', function () {
               // Load the second model with a different material
               var avatarModel2 = document.createElement('a-gltf-model');
               avatarModel2.setAttribute('rotation', '90 0 0');
               avatarModel2.setAttribute('position', '0.5 0 0');
               avatarModel2.setAttribute('src', '#avatarModel2');
-              this.el.appendChild(avatarModel2);
+              this.appendChild(avatarModel2);
             });
           },
         });
