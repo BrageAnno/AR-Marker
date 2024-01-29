@@ -17,32 +17,35 @@
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
         <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor.glb"></a-asset-item>
-
-        <!-- Define materials with different colors -->
-        <a-mtl id="materialModel1" color="#FF0000"></a-mtl>
-        <a-mtl id="materialModel2" color="#00FF00"></a-mtl>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Apply different materials for each model -->
-        <a-gltf-model
-          id="avatarModel1"
-          rotation="90 0 0"
-          position="-0.5 0 0.1"
+        <a-entity
+          id="modelsContainer"
+          position="0 0.1 0"
           scale="0.18 0.18 0.18"
-          src="#avatarModel1"
-          material="#materialModel1"
-        ></a-gltf-model>
-        <a-gltf-model
-          id="avatarModel2"
-          rotation="90 0 0"
-          position="0.5 0 0.1"
-          scale="0.18 0.18 0.18"
-          src="#avatarModel2"
-          material="#materialModel2"
-        ></a-gltf-model>
+        ></a-entity>
       </a-entity>
+
+      <script>
+        // Load the first model initially
+        var modelsContainer = document.getElementById('modelsContainer');
+        var avatarModel1 = document.createElement('a-gltf-model');
+        avatarModel1.setAttribute('rotation', '90 0 0');
+        avatarModel1.setAttribute('position', '-0.5 0 0');
+        avatarModel1.setAttribute('src', '#avatarModel1');
+        modelsContainer.appendChild(avatarModel1);
+
+        // Load the second model on touch
+        document.addEventListener('touchstart', function () {
+          var avatarModel2 = document.createElement('a-gltf-model');
+          avatarModel2.setAttribute('rotation', '90 0 0');
+          avatarModel2.setAttribute('position', '0.5 0 0');
+          avatarModel2.setAttribute('src', '#avatarModel2');
+          modelsContainer.appendChild(avatarModel2);
+        });
+      </script>
     </a-scene>
   </body>
 </html>
