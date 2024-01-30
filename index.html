@@ -21,7 +21,7 @@
   </head>
   <body>
     <!-- Button outside the AR scene -->
-    <button id="toggleButton">År 1150</button>
+    <button id="toggleButton" style="background-color: #3498db; color: #fff;">År 1150</button>
 
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: ./AnnoARLogoTargets.mind;"
@@ -103,7 +103,7 @@
               break;
             default:
               toggleButton.textContent = 'Toggle Models';
-              toggleButton.style.backgroundColor = '#3498db'; // Default color
+              toggleButton.style.backgroundColor = '#3498db'; // Default color (matching first model)
               break;
           }
         }
