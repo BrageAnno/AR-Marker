@@ -12,7 +12,6 @@
         right: 10px;
         padding: 15px; /* Increase padding for a larger button */
         font-size: 18px; /* Increase font size for better visibility */
-        color: #fff;
         cursor: pointer;
         border: none;
         outline: none;
@@ -22,7 +21,7 @@
   </head>
   <body>
     <!-- Button outside the AR scene -->
-    <button id="toggleButton">Toggle Models</button>
+    <button id="toggleButton">År 1150</button>
 
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: ./AnnoARLogoTargets.mind;"
@@ -103,7 +102,7 @@
               toggleButton.style.backgroundColor = '#f39c12'; // Orange color
               break;
             default:
-              toggleButton.textContent = 'År 1150';
+              toggleButton.textContent = 'Toggle Models';
               toggleButton.style.backgroundColor = ''; // Default color
               break;
           }
