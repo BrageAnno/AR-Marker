@@ -21,50 +21,52 @@
   </style>
 </head>
 <body>
-  <a-scene
-    mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
-    color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false"
-  >
-    <a-assets>
-      <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
-      <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
-    </a-assets>
+  <!-- Container div for A-Frame scene -->
+  <div mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;">
+    <a-scene
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
+        <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
+      </a-assets>
 
-    <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera>
+      <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera>
 
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-entity id="modelsContainer" position="0 0.1 0" scale="0.18 0.18 0.18"></a-entity>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity id="modelsContainer" position="0 0.1 0" scale="0.18 0.18 0.18"></a-entity>
 
-      <!-- GUI button -->
-      <button id="toggleButton" onclick="toggleModelsVisibility">Toggle Models</button>
-    </a-entity>
+        <!-- GUI button -->
+        <button id="toggleButton" onclick="toggleModelsVisibility">Toggle Models</button>
+      </a-entity>
 
-    <script>
-      var modelsContainer = document.getElementById('modelsContainer');
-      var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
-      var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
+      <script>
+        var modelsContainer = document.getElementById('modelsContainer');
+        var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
+        var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
 
-      function createModel(src, position) {
-        var model = document.createElement('a-gltf-model');
-        model.setAttribute('rotation', '90 0 0');
-        model.setAttribute('position', position);
-        model.setAttribute('src', src);
-        model.setAttribute('visible', false); // Initially hidden
-        modelsContainer.appendChild(model);
-        return model;
-      }
+        function createModel(src, position) {
+          var model = document.createElement('a-gltf-model');
+          model.setAttribute('rotation', '90 0 0');
+          model.setAttribute('position', position);
+          model.setAttribute('src', src);
+          model.setAttribute('visible', false); // Initially hidden
+          modelsContainer.appendChild(model);
+          return model;
+        }
 
-      function toggleModelsVisibility() {
-        avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
-        avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
-      }
+        function toggleModelsVisibility() {
+          avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
+          avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
+        }
 
-      // Show the first model initially
-      avatarModel1.setAttribute('visible', true);
-    </script>
-  </a-scene>
+        // Show the first model initially
+        avatarModel1.setAttribute('visible', true);
+      </script>
+    </a-scene>
+  </div>
 </body>
 </html>
