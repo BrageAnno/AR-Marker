@@ -78,6 +78,9 @@
 
           // Show the next model in the sequence
           models[currentModelIndex].setAttribute('visible', true);
+
+          // Update button text based on the current model
+          toggleButton.textContent = 'Toggle Model ' + (currentModelIndex + 1);
         }
 
         // Show the first model initially
