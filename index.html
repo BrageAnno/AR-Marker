@@ -76,9 +76,11 @@
           avatarModel4.setAttribute('visible', false);
 
           // Show the next model in the sequence
-          currentModelIndex = (currentModelIndex % 4) + 1;
           var currentModel = document.getElementById('avatarModel' + currentModelIndex);
           currentModel.setAttribute('visible', true);
+
+          // Update the currentModelIndex for the next toggle
+          currentModelIndex = (currentModelIndex % 4) + 1;
         }
 
         // Show the first model initially
