@@ -26,13 +26,22 @@
           position="0 0.1 0"
           scale="0.18 0.18 0.18"
         ></a-entity>
+
+        <!-- UI button for toggling models -->
+        <a-entity
+          id="toggleButton"
+          geometry="primitive: plane; width: 1; height: 0.3"
+          material="color: #00cc00; opacity: 0.7"
+          position="0 -0.5 -2"
+          text="value: Toggle Models; align: center; color: #333"
+        ></a-entity>
       </a-entity>
 
       <script>
         var modelsContainer = document.getElementById('modelsContainer');
         var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
         var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
-      
+
         function createModel(src, position) {
           var model = document.createElement('a-gltf-model');
           model.setAttribute('rotation', '90 0 0');
@@ -42,17 +51,18 @@
           modelsContainer.appendChild(model);
           return model;
         }
-      
+
         function toggleModelsVisibility() {
           avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
           avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
         }
-      
+
         // Show the first model initially
         avatarModel1.setAttribute('visible', true);
-      
-        // Toggle between models on touch
-        document.addEventListener('touchstart', function () {
+
+        // Toggle between models on button click
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', function () {
           toggleModelsVisibility();
         });
       </script>
