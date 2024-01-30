@@ -21,7 +21,7 @@
     <!-- Button outside the AR scene -->
     <a-plane
       id="toggleButton"
-      position="0 0 0"
+      position="0 0 0.01"
       scale="2 1 1"
       material="shader: flat; opacity: 0.7; color: #00cc00;"
       text="value: Toggle Models; align: center; color: #333"
@@ -34,12 +34,13 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
+      <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera> <!-- Adjust the near property -->
+
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
         <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <a-entity
           id="modelsContainer"
