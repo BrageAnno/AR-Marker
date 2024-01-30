@@ -51,12 +51,14 @@
 
       <script>
         var modelsContainer = document.getElementById('modelsContainer');
-        var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
-        var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
-        var avatarModel3 = createModel('#avatarModel3', '-0.5 0 0');
-        var avatarModel4 = createModel('#avatarModel4', '-0.5 0 0');
+        var models = []; // Array to store model references
+        var currentModelIndex = 0; // Current model index
 
-        var currentModelIndex = 1; // Current model index
+        // Create models and add them to the container
+        for (var i = 1; i <= 4; i++) {
+          var model = createModel('#avatarModel' + i, '-0.5 0 0');
+          models.push(model);
+        }
 
         function createModel(src, position) {
           var model = document.createElement('a-gltf-model');
@@ -69,22 +71,18 @@
         }
 
         function toggleModelsVisibility() {
-          // Hide all models first
-          avatarModel1.setAttribute('visible', false);
-          avatarModel2.setAttribute('visible', false);
-          avatarModel3.setAttribute('visible', false);
-          avatarModel4.setAttribute('visible', false);
-
-          // Show the next model in the sequence
-          var currentModel = document.getElementById('avatarModel' + currentModelIndex);
-          currentModel.setAttribute('visible', true);
+          // Hide the current model
+          models[currentModelIndex].setAttribute('visible', false);
 
           // Update the currentModelIndex for the next toggle
-          currentModelIndex = (currentModelIndex % 4) + 1;
+          currentModelIndex = (currentModelIndex + 1) % 4;
+
+          // Show the next model in the sequence
+          models[currentModelIndex].setAttribute('visible', true);
         }
 
         // Show the first model initially
-        avatarModel1.setAttribute('visible', true);
+        models[currentModelIndex].setAttribute('visible', true);
 
         // Toggle between models on button click
         var toggleButton = document.getElementById('toggleButton');
