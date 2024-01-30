@@ -5,8 +5,27 @@
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      /* Custom styles for the button */
+      #toggleButton {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 50px; /* Adjust the size as needed */
+        height: 50px; /* Adjust the size as needed */
+        z-index: 1; /* Ensure the button is above the 3D models */
+      }
+    </style>
   </head>
   <body>
+    <!-- Button outside the AR scene -->
+    <a-image
+      id="toggleButton"
+      src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/UIChangeButton.png"
+      position="0 0 0.01"
+      scale="0.1 0.1 0.1" <!-- Adjust the scale as needed -->
+    ></a-image>
+
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
       color-space="sRGB"
@@ -14,30 +33,19 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
+      <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera> <!-- Adjust the near property -->
+
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
         <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <a-entity
           id="modelsContainer"
           position="0 0.1 0"
           scale="0.18 0.18 0.18"
         ></a-entity>
-
-        <!-- A-Frame GUI button with event-set component -->
-        <a-gui-button
-          id="toggleButton"
-          width="2"
-          height="0.5"
-          value="Toggle Models"
-          position="-1 0.8 -2"
-          scale="0.5 0.5 0.5"
-          event-set__toggle="_event: touchstart; _target: #toggleButton; _scale: 0.48 0.48 0.48"
-          onclick="toggleModelsVisibility()"
-        ></a-gui-button>
       </a-entity>
 
       <script>
@@ -62,6 +70,12 @@
 
         // Show the first model initially
         avatarModel1.setAttribute('visible', true);
+
+        // Toggle between models on button touch
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', function () {
+          toggleModelsVisibility();
+        });
       </script>
     </a-scene>
   </body>
