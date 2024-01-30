@@ -13,12 +13,19 @@
         right: 10px;
         padding: 15px;
         font-size: 18px;
+        z-index: 1; /* Ensure the button is above the 3D models */
       }
     </style>
   </head>
   <body>
     <!-- Button outside the AR scene -->
-    <button id="toggleButton">Toggle Models</button>
+    <a-plane
+      id="toggleButton"
+      position="0 0 0"
+      scale="2 1 1"
+      material="shader: flat; opacity: 0.7; color: #00cc00;"
+      text="value: Toggle Models; align: center; color: #333"
+    ></a-plane>
 
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
