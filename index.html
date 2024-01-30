@@ -7,6 +7,9 @@
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
+    <!-- Button outside the AR scene -->
+    <button id="toggleButton">Toggle Models</button>
+
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
       color-space="sRGB"
@@ -25,15 +28,6 @@
           id="modelsContainer"
           position="0 0.1 0"
           scale="0.18 0.18 0.18"
-        ></a-entity>
-
-        <!-- UI button for toggling models -->
-        <a-entity
-          id="toggleButton"
-          geometry="primitive: plane; width: 1; height: 0.3"
-          material="color: #00cc00; opacity: 0.7"
-          position="0 -0.5 -2"
-          text="value: Toggle Models; align: center; color: #333"
         ></a-entity>
       </a-entity>
 
