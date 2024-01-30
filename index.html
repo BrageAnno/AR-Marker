@@ -56,6 +56,8 @@
         var avatarModel3 = createModel('#avatarModel3', '-0.5 0 0');
         var avatarModel4 = createModel('#avatarModel4', '-0.5 0 0');
 
+        var currentModelIndex = 1; // Current model index
+
         function createModel(src, position) {
           var model = document.createElement('a-gltf-model');
           model.setAttribute('rotation', '90 0 0');
@@ -67,10 +69,16 @@
         }
 
         function toggleModelsVisibility() {
-          avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
-          avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
-          avatarModel3.setAttribute('visible', !avatarModel3.getAttribute('visible'));
-          avatarModel4.setAttribute('visible', !avatarModel4.getAttribute('visible'));
+          // Hide all models first
+          avatarModel1.setAttribute('visible', false);
+          avatarModel2.setAttribute('visible', false);
+          avatarModel3.setAttribute('visible', false);
+          avatarModel4.setAttribute('visible', false);
+
+          // Show the next model in the sequence
+          currentModelIndex = (currentModelIndex % 4) + 1;
+          var currentModel = document.getElementById('avatarModel' + currentModelIndex);
+          currentModel.setAttribute('visible', true);
         }
 
         // Show the first model initially
