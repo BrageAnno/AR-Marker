@@ -29,16 +29,17 @@
           scale="0.18 0.18 0.18"
         ></a-entity>
 
-        <!-- A-Frame GUI button -->
-        <a-gui-icon-button
+        <!-- A-Frame GUI toggle button -->
+        <a-gui-toggle
           id="toggleButton"
-          onclick="toggleModelsVisibility"
           width="2"
-          height="2"
+          height="0.5"
           position="-1 0.8 -2"
           scale="0.5 0.5 0.5"
-          icon="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/UIChangeButton.png"
-        ></a-gui-icon-button>
+          on="Toggle On"
+          off="Toggle Off"
+          onclick="toggleModelsVisibility"
+        ></a-gui-toggle>
       </a-entity>
 
       <script>
