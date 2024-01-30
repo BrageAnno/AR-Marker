@@ -21,7 +21,7 @@
     <!-- Button outside the AR scene -->
     <a-image
       id="toggleButton"
-      src="https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/UIChangeButton.png"
+      src="UIChangeButton.png"
       position="0 0 0.01"
       scale="0.1 0.1 0.1"
     ></a-image>
@@ -71,7 +71,7 @@
         // Show the first model initially
         avatarModel1.setAttribute('visible', true);
 
-        // Toggle between models on button touch
+        // Toggle between models on button click
         var toggleButton = document.getElementById('toggleButton');
         toggleButton.addEventListener('click', function () {
           toggleModelsVisibility();
