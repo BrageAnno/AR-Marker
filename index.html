@@ -22,7 +22,7 @@
   </head>
   <body>
     <!-- Button outside the AR scene -->
-    <button id="toggleButton" onclick="toggleModelsVisibility()">Toggle Models</button>
+    <button id="toggleButton">Toggle Models</button>
 
     <a-scene
       mindar-image="filterMinCF:0.0001; filterBeta: 0.001; imageTargetSrc: https://raw.githubusercontent.com/BrageAnno/AR-Marker/main/AnnoARLogoTargets.mind;"
@@ -68,6 +68,10 @@
 
         // Show the first model initially
         avatarModel1.setAttribute('visible', true);
+
+        // Toggle between models on button click
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', toggleModelsVisibility);
       </script>
     </a-scene>
   </body>
