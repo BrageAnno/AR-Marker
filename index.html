@@ -5,23 +5,21 @@
     <script src="aframe.min.js"></script>
     <script src="mindar-image-aframe.prod.js"></script>
     <style>
-      /* Style for the 2D UI button */
       #toggleButton {
         position: fixed;
         bottom: 10px;
         right: 10px;
         padding: 10px;
-        background-color: rgba(52, 152, 219, 0.8); /* Semi-transparent blue background */
+        background-color: rgba(52, 152, 219, 0.8);
         color: #fff;
         cursor: pointer;
         border: none;
         outline: none;
-        z-index: 1000; /* Ensure the button is above the 3D models */
+        z-index: 1000;
       }
     </style>
   </head>
   <body>
-    <!-- Button outside the AR scene -->
     <button id="toggleButton">Toggle Models</button>
 
     <a-scene
@@ -31,7 +29,7 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera> <!-- Adjust the near property -->
+      <a-camera position="0 0 0.1" look-controls="enabled: false" near="0.01"></a-camera>
 
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
@@ -45,15 +43,21 @@
           id="modelsContainer"
           position="0 0.1 0"
           scale="0.18 0.18 0.18"
-        ></a-entity>
+        >
+          <a-entity id="modelGroup" position="0 0 0">
+            <a-gltf-model id="avatarModel1" src="#avatarModel1"></a-gltf-model>
+            <a-gltf-model id="avatarModel2" src="#avatarModel2"></a-gltf-model>
+            <a-gltf-model id="avatarModel3" src="#avatarModel3"></a-gltf-model>
+            <a-gltf-model id="avatarModel4" src="#avatarModel4"></a-gltf-model>
+          </a-entity>
+        </a-entity>
       </a-entity>
 
       <script>
         var modelsContainer = document.getElementById('modelsContainer');
-        var models = []; // Array to store model references
-        var currentModelIndex = 0; // Current model index
+        var models = [];
+        var currentModelIndex = 0;
 
-        // Create models and add them to the container
         for (var i = 1; i <= 4; i++) {
           var model = createModel('#avatarModel' + i, '-0.5 0 0');
           models.push(model);
@@ -61,29 +65,22 @@
 
         function createModel(src, position) {
           var model = document.createElement('a-gltf-model');
-          model.setAttribute('rotation', '90 0 0');
+          model.setAttribute('rotation', '0 0 0');
           model.setAttribute('position', position);
           model.setAttribute('src', src);
-          model.setAttribute('visible', false); // Initially hidden
+          model.setAttribute('visible', false);
           modelsContainer.appendChild(model);
           return model;
         }
 
         function toggleModelsVisibility() {
-          // Hide the current model
           models[currentModelIndex].setAttribute('visible', false);
-
-          // Update the currentModelIndex for the next toggle
           currentModelIndex = (currentModelIndex + 1) % 4;
-
-          // Show the next model in the sequence
           models[currentModelIndex].setAttribute('visible', true);
         }
 
-        // Show the first model initially
         models[currentModelIndex].setAttribute('visible', true);
 
-        // Toggle between models on button click
         var toggleButton = document.getElementById('toggleButton');
         toggleButton.addEventListener('click', toggleModelsVisibility);
       </script>
