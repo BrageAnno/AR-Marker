@@ -37,6 +37,8 @@
       <a-assets>
         <a-asset-item id="avatarModel1" src="./DomkirkeoddenARTest.glb"></a-asset-item>
         <a-asset-item id="avatarModel2" src="./DomkirkeoddenARTESTColor2.glb"></a-asset-item>
+        <a-asset-item id="avatarModel3" src="./DomkirkeoddenARTESTColor3.glb"></a-asset-item>
+        <a-asset-item id="avatarModel4" src="./DomkirkeoddenARTESTColor4.glb"></a-asset-item>
       </a-assets>
 
       <a-entity mindar-image-target="targetIndex: 0">
@@ -51,6 +53,8 @@
         var modelsContainer = document.getElementById('modelsContainer');
         var avatarModel1 = createModel('#avatarModel1', '-0.5 0 0');
         var avatarModel2 = createModel('#avatarModel2', '-0.5 0 0');
+        var avatarModel3 = createModel('#avatarModel3', '-0.5 0 0');
+        var avatarModel4 = createModel('#avatarModel4', '-0.5 0 0');
 
         function createModel(src, position) {
           var model = document.createElement('a-gltf-model');
@@ -65,6 +69,8 @@
         function toggleModelsVisibility() {
           avatarModel1.setAttribute('visible', !avatarModel1.getAttribute('visible'));
           avatarModel2.setAttribute('visible', !avatarModel2.getAttribute('visible'));
+          avatarModel3.setAttribute('visible', !avatarModel3.getAttribute('visible'));
+          avatarModel4.setAttribute('visible', !avatarModel4.getAttribute('visible'));
         }
 
         // Show the first model initially
