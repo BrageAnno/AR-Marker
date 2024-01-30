@@ -80,7 +80,28 @@
           models[currentModelIndex].setAttribute('visible', true);
 
           // Update button text based on the current model
-          toggleButton.textContent = 'Toggle Model ' + (currentModelIndex + 1);
+          updateButtonText();
+        }
+
+        function updateButtonText() {
+          var toggleButton = document.getElementById('toggleButton');
+          switch (currentModelIndex) {
+            case 0:
+              toggleButton.textContent = 'År 1150';
+              break;
+            case 1:
+              toggleButton.textContent = 'År 1250';
+              break;
+            case 2:
+              toggleButton.textContent = 'År 1300';
+              break;
+            case 3:
+              toggleButton.textContent = 'År 1430';
+              break;
+            default:
+              toggleButton.textContent = 'Toggle Models';
+              break;
+          }
         }
 
         // Show the first model initially
